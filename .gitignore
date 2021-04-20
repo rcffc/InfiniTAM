@@ -11,6 +11,7 @@ x64/
 /freeglut/
 /install/
 /librealsense/
+/Files/
 /Files/Out/out.ppm
 /Files/Out/*.ppm
 /Files/Teddy/Frames
@@ -21,3 +22,11 @@ CMakeLists.txt.user*
 
 # CLion
 \.idea/
+
+### VisualStudioCode ###
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+

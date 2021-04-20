@@ -80,7 +80,7 @@ namespace ITMLib
 		}
 
 		// Suppress the default copy constructor and assignment operator
-		ITMLocalVBA(const ITMLocalVBA&) { throw std::runtime_error("Suppressed"); }
-		ITMLocalVBA& operator=(const ITMLocalVBA&) { throw std::runtime_error("Suppressed"); }
+		ITMLocalVBA(const ITMLocalVBA&) = delete;
+		ITMLocalVBA& operator=(const ITMLocalVBA&) = delete;
 	};
 }
