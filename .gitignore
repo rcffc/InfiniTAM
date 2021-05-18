@@ -30,3 +30,8 @@ CMakeLists.txt.user*
 !.vscode/launch.json
 !.vscode/extensions.json
 
+*.dat
+last.txt
+vba.txt
+out/
+.vs/
