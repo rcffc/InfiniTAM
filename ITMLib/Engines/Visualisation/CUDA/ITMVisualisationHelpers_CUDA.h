@@ -45,7 +45,7 @@ namespace ITMLib
 		if (x >= imgSize.x || y >= imgSize.y) return;
 
 		int locId = x + y * imgSize.x;
-		int locId2 = (int)floor((float)x / minmaximg_subsample) + (int)floor((float)y / minmaximg_subsample) * imgSize.x;
+		int locId2 = (int)floorf((float)x / minmaximg_subsample) + (int)floorf((float)y / minmaximg_subsample) * imgSize.x;
 
 		castRay<TVoxel, TIndex, modifyVisibleEntries>(out_ptsRay[locId], entriesVisibleType, x, y, voxelData, voxelIndex, invM, invProjParams, oneOverVoxelSize, mu, minmaximg[locId2]);
 	}
@@ -61,7 +61,7 @@ namespace ITMLib
 
 		int locId = fwdProjMissingPoints[pointId];
 		int y = locId / imgSize.x, x = locId - y*imgSize.x;
-		int locId2 = (int)floor((float)x / minmaximg_subsample) + (int)floor((float)y / minmaximg_subsample) * imgSize.x;
+		int locId2 = (int)floorf((float)x / minmaximg_subsample) + (int)floorf((float)y / minmaximg_subsample) * imgSize.x;
 
 		castRay<TVoxel, TIndex, modifyVisibleEntries>(forwardProjection[locId], entriesVisibleType, x, y, voxelData, voxelIndex, invM, invProjParams, oneOverVoxelSize, mu, minmaximg[locId2]);
 	}

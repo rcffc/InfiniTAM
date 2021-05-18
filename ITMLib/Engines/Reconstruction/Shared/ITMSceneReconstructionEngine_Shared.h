@@ -207,7 +207,7 @@ _CPU_AND_GPU_CODE_ inline void buildHashAllocAndVisibleTypePP(DEVICEPTR(uchar) *
 
 	direction = point_e - point;
 	norm = sqrt(direction.x * direction.x + direction.y * direction.y + direction.z * direction.z);
-	noSteps = (int)ceil(2.0f*norm);
+	noSteps = (int)ceilf(2.0f*norm);
 
 	direction /= (float)(noSteps - 1);
 

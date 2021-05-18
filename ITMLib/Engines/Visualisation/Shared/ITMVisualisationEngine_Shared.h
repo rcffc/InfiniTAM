@@ -54,10 +54,10 @@ _CPU_AND_GPU_CODE_ inline bool ProjectSingleBlock(const THREADPTR(Vector3s) & bl
 		pt2d.y = (intrinsics.y * pt3d.y / pt3d.z + intrinsics.w) / minmaximg_subsample;
 
 		// remember bounding box, zmin and zmax
-		if (upperLeft.x > floor(pt2d.x)) upperLeft.x = (int)floor(pt2d.x);
-		if (lowerRight.x < ceil(pt2d.x)) lowerRight.x = (int)ceil(pt2d.x);
-		if (upperLeft.y > floor(pt2d.y)) upperLeft.y = (int)floor(pt2d.y);
-		if (lowerRight.y < ceil(pt2d.y)) lowerRight.y = (int)ceil(pt2d.y);
+		if (upperLeft.x > floorf(pt2d.x)) upperLeft.x = (int)floorf(pt2d.x);
+		if (lowerRight.x < ceilf(pt2d.x)) lowerRight.x = (int)ceilf(pt2d.x);
+		if (upperLeft.y > floorf(pt2d.y)) upperLeft.y = (int)floorf(pt2d.y);
+		if (lowerRight.y < ceilf(pt2d.y)) lowerRight.y = (int)ceilf(pt2d.y);
 		if (zRange.x > pt3d.z) zRange.x = pt3d.z;
 		if (zRange.y < pt3d.z) zRange.y = pt3d.z;
 	}
@@ -80,8 +80,8 @@ _CPU_AND_GPU_CODE_ inline void CreateRenderingBlocks(DEVICEPTR(RenderingBlock) *
 	const THREADPTR(Vector2i) & upperLeft, const THREADPTR(Vector2i) & lowerRight, const THREADPTR(Vector2f) & zRange)
 {
 	// split bounding box into 16x16 pixel rendering blocks
-	for (int by = 0; by < ceil((float)(1 + lowerRight.y - upperLeft.y) / renderingBlockSizeY); ++by) {
-		for (int bx = 0; bx < ceil((float)(1 + lowerRight.x - upperLeft.x) / renderingBlockSizeX); ++bx) {
+	for (int by = 0; by < ceilf((float)(1 + lowerRight.y - upperLeft.y) / renderingBlockSizeY); ++by) {
+		for (int bx = 0; bx < ceilf((float)(1 + lowerRight.x - upperLeft.x) / renderingBlockSizeX); ++bx) {
 			if (offset >= MAX_RENDERING_BLOCKS) return;
 			//for each rendering block: add it to the list
 			DEVICEPTR(RenderingBlock) & b(renderingBlockList[offset++]);

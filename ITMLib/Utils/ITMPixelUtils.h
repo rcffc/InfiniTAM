@@ -11,7 +11,7 @@
 template<typename T> _CPU_AND_GPU_CODE_ inline Vector4f interpolateBilinear(const CONSTPTR(ORUtils::Vector4<T>) *source,
 	const THREADPTR(Vector2f) & position, const CONSTPTR(Vector2i) & imgSize)
 {
-	const Vector2i p((int)floor(position.x), (int)floor(position.y));
+	const Vector2i p((int)floorf(position.x), (int)floorf(position.y));
 	const Vector2f delta(position.x - (float)p.x, position.y - (float)p.y);
 
 	ORUtils::Vector4<T> a = source[p.x + p.y * imgSize.x];
@@ -37,7 +37,7 @@ template<typename T> _CPU_AND_GPU_CODE_ inline Vector4f interpolateBilinear(cons
 template<typename T> _CPU_AND_GPU_CODE_ inline float interpolateBilinear_single(const CONSTPTR(T) *source,
 	const THREADPTR(Vector2f) & position, const CONSTPTR(Vector2i) & imgSize)
 {
-	const Vector2i p((int)floor(position.x), (int)floor(position.y));
+	const Vector2i p((int)floorf(position.x), (int)floorf(position.y));
 	const Vector2f delta(position.x - (float)p.x, position.y - (float)p.y);
 
 	T a = source[p.x + p.y * imgSize.x];
@@ -56,7 +56,7 @@ template<typename T> _CPU_AND_GPU_CODE_ inline float interpolateBilinear_single(
 template<typename T> _CPU_AND_GPU_CODE_ inline Vector2f interpolateBilinear_Vector2(const CONSTPTR(ORUtils::Vector2<T>) *source,
 	const THREADPTR(Vector2f) & position, const CONSTPTR(Vector2i) & imgSize)
 {
-	const Vector2i p((int)floor(position.x), (int)floor(position.y));
+	const Vector2i p((int)floorf(position.x), (int)floorf(position.y));
 	const Vector2f delta(position.x - (float)p.x, position.y - (float)p.y);
 
 	ORUtils::Vector2<T> a = source[p.x + p.y * imgSize.x];
@@ -78,7 +78,7 @@ template<typename T> _CPU_AND_GPU_CODE_ inline Vector2f interpolateBilinear_Vect
 template<typename T> _CPU_AND_GPU_CODE_ inline Vector4f interpolateBilinear_withHoles(const CONSTPTR(ORUtils::Vector4<T>) *source,
 	const THREADPTR(Vector2f) & position, const CONSTPTR(Vector2i) & imgSize)
 {
-	const Vector2s p((short)floor(position.x), (short)floor(position.y));
+	const Vector2s p((short)floorf(position.x), (short)floorf(position.y));
 	const Vector2f delta(position.x - (float)p.x, position.y - (float)p.y);
 
 	const ORUtils::Vector4<T> a = source[p.x + p.y * imgSize.x];

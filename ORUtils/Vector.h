@@ -77,7 +77,7 @@ namespace ORUtils {
 		}
 
 		_CPU_AND_GPU_CODE_ inline Vector2<int> toIntFloor() const {
-			return Vector2<int>((int)floor(this->x), (int)floor(this->y));
+			return Vector2<int>((int)floorf(this->x), (int)floorf(this->y));
 		}
 
 		_CPU_AND_GPU_CODE_ inline Vector2<unsigned char> toUChar() const {
@@ -228,15 +228,15 @@ namespace ORUtils {
 		}
 
 		_CPU_AND_GPU_CODE_ inline Vector3<short> toShortFloor() const {
-			return Vector3<short>((short)floor(this->x), (short)floor(this->y), (short)floor(this->z));
+			return Vector3<short>((short)floorf(this->x), (short)floorf(this->y), (short)floorf(this->z));
 		}
 
 		_CPU_AND_GPU_CODE_ inline Vector3<int> toIntFloor() const {
-			return Vector3<int>((int)floor(this->x), (int)floor(this->y), (int)floor(this->z));
+			return Vector3<int>((int)floorf(this->x), (int)floorf(this->y), (int)floorf(this->z));
 		}
 
 		_CPU_AND_GPU_CODE_ inline Vector3<int> toIntFloor(Vector3<float> &residual) const {
-			Vector3<float> intFloor(floor(this->x), floor(this->y), floor(this->z));
+			Vector3<float> intFloor(floorf(this->x), floorf(this->y), floorf(this->z));
 			residual = *this - intFloor;
 			return Vector3<int>((int)intFloor.x, (int)intFloor.y, (int)intFloor.z);
 		}
