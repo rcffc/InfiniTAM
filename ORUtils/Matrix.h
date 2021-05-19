@@ -83,6 +83,24 @@ namespace ORUtils {
 
 		// set values
 		_CPU_AND_GPU_CODE_ inline void setValues(const T *mp) { memcpy(this->m, mp, sizeof(T) * 16); }
+		_CPU_AND_GPU_CODE_ inline void setValues(T m0, T m1, T m2, T m3, T m4, T m5, T m6, T m7, T m8, T m9, T m10, T m11, T m12, T m13, T m14, T m15)	{ 
+			this->m[0] = m0; 
+			this->m[1] = m1; 
+			this->m[2] = m2;
+			this->m[3] = m3;
+			this->m[4] = m4;
+			this->m[5] = m5;
+			this->m[6] = m6;
+			this->m[7] = m7;
+			this->m[8] = m8;
+			this->m[9] = m9;
+			this->m[10] = m10;
+			this->m[11] = m11;
+			this->m[12] = m12;
+			this->m[13] = m13;
+			this->m[14] = m14;
+			this->m[15] = m15;
+			}
 		_CPU_AND_GPU_CODE_ inline void setValues(T r)	{ for (int i = 0; i < 16; i++)	this->m[i] = r; }
 		_CPU_AND_GPU_CODE_ inline void setZeros() { memset(this->m, 0, sizeof(T) * 16); }
 		_CPU_AND_GPU_CODE_ inline void setIdentity() { setZeros(); this->m00 = this->m11 = this->m22 = this->m33 = 1; }
