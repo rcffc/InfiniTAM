@@ -94,7 +94,7 @@ _CPU_AND_GPU_CODE_ inline void computeUpdatedVoxelColorInfo(DEVICEPTR(TVoxel) &v
 	const CONSTPTR(Vector4f) & projParams_rgb, float mu, uchar maxW, float eta, const CONSTPTR(Vector4u) *rgb, const CONSTPTR(Vector2i) & imgSize)
 {
 	Vector4f pt_camera; Vector2f pt_image;
-	Vector3f rgb_measure, oldC, newC; Vector3u buffV3u;
+	Vector3f rgb_measure, oldC, newC; Vector3w buffV3u;
 	float newW, oldW;
 
 	buffV3u = voxel.clr;

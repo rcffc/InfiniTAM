@@ -32,6 +32,7 @@ typedef class ORUtils::Vector3<int> Vector3i;
 typedef class ORUtils::Vector3<uint> Vector3ui;
 typedef class ORUtils::Vector3<uchar> Vector3u;
 typedef class ORUtils::Vector3<float> Vector3f;
+typedef ORUtils::Vector3w Vector3w;
 
 typedef class ORUtils::Vector4<float> Vector4f;
 typedef class ORUtils::Vector4<int> Vector4i;
