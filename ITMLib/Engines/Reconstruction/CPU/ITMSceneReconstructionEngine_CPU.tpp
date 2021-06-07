@@ -355,6 +355,7 @@ void ITMSceneReconstructionEngine_CPU<TVoxel, ITMPlainVoxelArray>::IntegrateInto
 
 	float *depth = view->depth->GetData(MEMORYDEVICE_CPU);
 	Vector4u *rgb = view->rgb->GetData(MEMORYDEVICE_CPU);
+	float *confidence = view->depthConfidence->GetData(MEMORYDEVICE_CPU);
 	TVoxel *voxelArray = scene->localVBA.GetVoxelBlocks();
 
 	const ITMPlainVoxelArray::IndexData *arrayInfo = scene->index.getIndexData();
@@ -382,6 +383,6 @@ void ITMSceneReconstructionEngine_CPU<TVoxel, ITMPlainVoxelArray>::IntegrateInto
 		pt_model.w = 1.0f;
 
 		ComputeUpdatedVoxelInfo<TVoxel::hasColorInformation, TVoxel::hasConfidenceInformation, TVoxel>::compute(voxelArray[locId], pt_model, M_d, projParams_d, M_rgb, projParams_rgb, mu, maxW, 
-			depth, depthImgSize, rgb, rgbImgSize);
+			depth, confidence, depthImgSize, rgb, rgbImgSize);
 	}
 }

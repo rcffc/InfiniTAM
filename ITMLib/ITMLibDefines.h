@@ -22,5 +22,5 @@ typedef ITMVoxel_f_rgb ITMVoxel;
 /** This chooses the way the voxels are addressed and indexed. At the moment,
     valid options are ITMVoxelBlockHash and ITMPlainVoxelArray.
 */
-typedef ITMLib::ITMVoxelBlockHash ITMVoxelIndex;
-//typedef ITMLib::ITMPlainVoxelArray ITMVoxelIndex;
+// typedef ITMLib::ITMVoxelBlockHash ITMVoxelIndex;
+typedef ITMLib::ITMPlainVoxelArray ITMVoxelIndex;

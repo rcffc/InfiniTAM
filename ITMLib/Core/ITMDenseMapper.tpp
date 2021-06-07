@@ -49,7 +49,7 @@ void ITMDenseMapper<TVoxel,TIndex>::ProcessFrame(const ITMView *view, const ITMT
 			swappingEngine->SaveToGlobalMemory(scene, renderState);
 			break;
 		case ITMLibSettings::SWAPPINGMODE_DELETE:
-			swappingEngine->CleanLocalMemory(scene, renderState);
+			// swappingEngine->CleanLocalMemory(scene, renderState);
 			break;
 		case ITMLibSettings::SWAPPINGMODE_DISABLED:
 			break;

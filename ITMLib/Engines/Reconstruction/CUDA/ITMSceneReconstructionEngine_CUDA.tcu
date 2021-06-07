@@ -280,6 +280,7 @@ void ITMSceneReconstructionEngine_CUDA<TVoxel, ITMPlainVoxelArray>::IntegrateInt
 
 	float *depth = view->depth->GetData(MEMORYDEVICE_CUDA);
 	Vector4u *rgb = view->rgb->GetData(MEMORYDEVICE_CUDA);
+	float *confidence = view->depthConfidence->GetData(MEMORYDEVICE_CUDA);
 	TVoxel *localVBA = scene->localVBA.GetVoxelBlocks();
 	const ITMPlainVoxelArray::ITMVoxelArrayInfo *arrayInfo = scene->index.getIndexData();
 
@@ -289,13 +290,13 @@ void ITMSceneReconstructionEngine_CUDA<TVoxel, ITMPlainVoxelArray>::IntegrateInt
 	if (scene->sceneParams->stopIntegratingAtMaxW)
 	{
 		integrateIntoScene_device < TVoxel, true> << <gridSize, cudaBlockSize >> >(localVBA, arrayInfo,
-			rgb, rgbImgSize, depth, depthImgSize, M_d, M_rgb, projParams_d, projParams_rgb, voxelSize, mu, maxW);
+			rgb, rgbImgSize, depth, confidence, depthImgSize, M_d, M_rgb, projParams_d, projParams_rgb, voxelSize, mu, maxW);
 		ORcudaKernelCheck;
 	}
 	else
 	{
 		integrateIntoScene_device < TVoxel, false> << <gridSize, cudaBlockSize >> >(localVBA, arrayInfo,
-			rgb, rgbImgSize, depth, depthImgSize, M_d, M_rgb, projParams_d, projParams_rgb, voxelSize, mu, maxW);
+			rgb, rgbImgSize, depth, confidence, depthImgSize, M_d, M_rgb, projParams_d, projParams_rgb, voxelSize, mu, maxW);
 		ORcudaKernelCheck;
 	}
 }

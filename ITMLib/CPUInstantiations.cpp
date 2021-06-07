@@ -3,7 +3,7 @@
 #include "ITMLibDefines.h"
 #include "Core/ITMBasicEngine.tpp"
 #include "Core/ITMBasicSurfelEngine.tpp"
-#include "Core/ITMMultiEngine.tpp"
+// #include "Core/ITMMultiEngine.tpp"
 #include "Core/ITMDenseMapper.tpp"
 #include "Core/ITMDenseSurfelMapper.tpp"
 #include "Engines/Meshing/CPU/ITMMeshingEngine_CPU.tpp"
@@ -27,7 +27,7 @@ namespace ITMLib
 	template class ITMBasicEngine<ITMVoxel, ITMVoxelIndex>;
 	template class ITMBasicSurfelEngine<ITMSurfel_grey>;
 	template class ITMBasicSurfelEngine<ITMSurfel_rgb>;
-	template class ITMMultiEngine<ITMVoxel, ITMVoxelIndex>;
+	// template class ITMMultiEngine<ITMVoxel, ITMVoxelIndex>;
 	template class ITMDenseMapper<ITMVoxel, ITMVoxelIndex>;
 	template class ITMVoxelMapGraphManager<ITMVoxel, ITMVoxelIndex>;
 	template class ITMVisualisationEngine_CPU<ITMVoxel, ITMVoxelIndex>;

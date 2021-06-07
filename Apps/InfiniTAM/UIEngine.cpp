@@ -20,7 +20,7 @@
 #include "../../ITMLib/ITMLibDefines.h"
 #include "../../ITMLib/Core/ITMBasicEngine.h"
 #include "../../ITMLib/Core/ITMBasicSurfelEngine.h"
-#include "../../ITMLib/Core/ITMMultiEngine.h"
+// #include "../../ITMLib/Core/ITMMultiEngine.h"
 
 #include "../../ORUtils/FileUtils.h"
 #include "../../InputSource/FFMPEGWriter.h"
@@ -232,13 +232,13 @@ void UIEngine::glutKeyUpFunction(unsigned char key, int x, int y)
 				uiEngine->outImage[0]->ChangeDims(uiEngine->mainEngine->GetView()->depth->noDims);
 			}
 
-			ITMMultiEngine<ITMVoxel, ITMVoxelIndex> *multiEngine = dynamic_cast<ITMMultiEngine<ITMVoxel, ITMVoxelIndex>*>(uiEngine->mainEngine);
-			if (multiEngine != NULL)
-			{
-				int idx = multiEngine->findPrimaryLocalMapIdx();
-				if (idx < 0) idx = 0;
-				multiEngine->setFreeviewLocalMapIdx(idx);
-			}
+			// ITMMultiEngine<ITMVoxel, ITMVoxelIndex> *multiEngine = dynamic_cast<ITMMultiEngine<ITMVoxel, ITMVoxelIndex>*>(uiEngine->mainEngine);
+			// if (multiEngine != NULL)
+			// {
+			// 	int idx = multiEngine->findPrimaryLocalMapIdx();
+			// 	if (idx < 0) idx = 0;
+			// 	multiEngine->setFreeviewLocalMapIdx(idx);
+			// }
 
 			uiEngine->freeviewActive = true;
 		}
@@ -317,18 +317,18 @@ void UIEngine::glutKeyUpFunction(unsigned char key, int x, int y)
 	}
 	break;
 	case '[':
-	case ']':
-	{
-		ITMMultiEngine<ITMVoxel, ITMVoxelIndex> *multiEngine = dynamic_cast<ITMMultiEngine<ITMVoxel, ITMVoxelIndex>*>(uiEngine->mainEngine);
-		if (multiEngine != NULL) 
-		{
-			int idx = multiEngine->getFreeviewLocalMapIdx();
-			if (key == '[') idx--;
-			else idx++;
-			multiEngine->changeFreeviewLocalMapIdx(&(uiEngine->freeviewPose), idx);
-			uiEngine->needsRefresh = true;
-		}
-	}
+	// case ']':
+	// {
+	// 	ITMMultiEngine<ITMVoxel, ITMVoxelIndex> *multiEngine = dynamic_cast<ITMMultiEngine<ITMVoxel, ITMVoxelIndex>*>(uiEngine->mainEngine);
+	// 	if (multiEngine != NULL) 
+	// 	{
+	// 		int idx = multiEngine->getFreeviewLocalMapIdx();
+	// 		if (key == '[') idx--;
+	// 		else idx++;
+	// 		multiEngine->changeFreeviewLocalMapIdx(&(uiEngine->freeviewPose), idx);
+	// 		uiEngine->needsRefresh = true;
+	// 	}
+	// }
 	break;
 	default:
 		break;

@@ -38,7 +38,7 @@ Core/ITMBasicEngine.tpp
 Core/ITMBasicSurfelEngine.tpp
 Core/ITMDenseMapper.tpp
 Core/ITMDenseSurfelMapper.tpp
-Core/ITMMultiEngine.tpp
+# Core/ITMMultiEngine.tpp
 )
 
 SET(ITMLIB_CORE_HEADERS
@@ -47,7 +47,7 @@ Core/ITMBasicSurfelEngine.h
 Core/ITMDenseMapper.h
 Core/ITMDenseSurfelMapper.h
 Core/ITMMainEngine.h
-Core/ITMMultiEngine.h
+# Core/ITMMultiEngine.h
 Core/ITMTrackingController.h
 )
 

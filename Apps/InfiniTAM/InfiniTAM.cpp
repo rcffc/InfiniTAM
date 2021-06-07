@@ -16,7 +16,7 @@
 #include "../../ITMLib/ITMLibDefines.h"
 #include "../../ITMLib/Core/ITMBasicEngine.h"
 #include "../../ITMLib/Core/ITMBasicSurfelEngine.h"
-#include "../../ITMLib/Core/ITMMultiEngine.h"
+// #include "../../ITMLib/Core/ITMMultiEngine.h"
 
 using namespace InfiniTAM::Engine;
 using namespace InputSource;
@@ -202,9 +202,9 @@ try
 	case ITMLibSettings::LIBMODE_BASIC_SURFELS:
 		mainEngine = new ITMBasicSurfelEngine<ITMSurfelT>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
 		break;
-	case ITMLibSettings::LIBMODE_LOOPCLOSURE:
-		mainEngine = new ITMMultiEngine<ITMVoxel, ITMVoxelIndex>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
-		break;
+	// case ITMLibSettings::LIBMODE_LOOPCLOSURE:
+	// 	mainEngine = new ITMMultiEngine<ITMVoxel, ITMVoxelIndex>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
+	// 	break;
 	default: 
 		throw std::runtime_error("Unsupported library mode!");
 		break;
