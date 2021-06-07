@@ -36,7 +36,7 @@
 struct ITMHashEntry
 {
 	/** Position of the corner of the 8x8x8 volume, that identifies the entry. */
-	Vector3s pos;
+	Vector3ss pos;
 	/** Offset in the excess list. */
 	int offset;
 	/** Pointer to the voxel block array.
@@ -67,6 +67,7 @@ namespace ITMLib
 
 		/** Maximum number of total entries. */
 		static const CONSTPTR(int) noTotalEntries = SDF_BUCKET_NUM + SDF_EXCESS_LIST_SIZE;
+		static const CONSTPTR(int) excessListSize = SDF_EXCESS_LIST_SIZE;
 		static const CONSTPTR(int) voxelBlockSize = SDF_BLOCK_SIZE * SDF_BLOCK_SIZE * SDF_BLOCK_SIZE;
 
 #ifndef __METALC__

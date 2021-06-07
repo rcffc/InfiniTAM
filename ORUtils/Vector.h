@@ -890,5 +890,45 @@ namespace ORUtils {
 			return Vector3<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255), (unsigned char)CLAMP(vi.z, 0, 255));
 		}
 	};
+
+	// Same as Vector3s, but had to create a version that does not use of union so I can wrap it with Pybind11
+	struct Vector3ss
+	{
+		short x, y, z;
+		
+		Vector3ss() {}
+
+		Vector3ss(const short &t)
+		{
+			this->x = t;
+			this->y = t;
+			this->z = t;
+		}
+
+		Vector3ss(const Vector3<short> &u)
+		{
+			this->x = u.x;
+			this->y = u.y;
+			this->z = u.z;
+		}
+
+		Vector3<float> toFloat() const
+		{
+			return Vector3<float>((float)this->x, (float)this->y, (float)this->z);
+		}
+		Vector3<int> toInt() const
+		{
+			return Vector3<int>((int)this->x, (int)this->y, (int)this->z);
+		}
+		Vector3<int> toIntRound() const
+		{
+			return Vector3<int>((int)ROUND(this->x), (int)ROUND(this->y), (int)ROUND(this->z));
+		}
+		// Vector3<short> toUChar() const
+		// {
+		// 	Vector3<int> vi = toIntRound();
+		// 	return Vector3<unsigned char>((unsigned char)CLAMP(vi.x, 0, 255), (unsigned char)CLAMP(vi.y, 0, 255), (unsigned char)CLAMP(vi.z, 0, 255));
+		// }
+	};
 }
 

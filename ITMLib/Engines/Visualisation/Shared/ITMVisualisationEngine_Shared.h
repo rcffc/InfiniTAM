@@ -32,7 +32,7 @@ _CPU_AND_GPU_CODE_ inline Vector4f InvertProjectionParams(const THREADPTR(Vector
 	return Vector4f(1.0f / projParams.x, 1.0f / projParams.y, -projParams.z, -projParams.w);
 }
 
-_CPU_AND_GPU_CODE_ inline bool ProjectSingleBlock(const THREADPTR(Vector3s) & blockPos, const THREADPTR(Matrix4f) & pose, const THREADPTR(Vector4f) & intrinsics, 
+_CPU_AND_GPU_CODE_ inline bool ProjectSingleBlock(const THREADPTR(Vector3ss) & blockPos, const THREADPTR(Matrix4f) & pose, const THREADPTR(Vector4f) & intrinsics, 
 	const THREADPTR(Vector2i) & imgSize, float voxelSize, THREADPTR(Vector2i) & upperLeft, THREADPTR(Vector2i) & lowerRight, THREADPTR(Vector2f) & zRange)
 {
 	upperLeft = imgSize / minmaximg_subsample;
@@ -41,7 +41,7 @@ _CPU_AND_GPU_CODE_ inline bool ProjectSingleBlock(const THREADPTR(Vector3s) & bl
 	for (int corner = 0; corner < 8; ++corner)
 	{
 		// project all 8 corners down to 2D image
-		Vector3s tmp = blockPos;
+		Vector3ss tmp = blockPos;
 		tmp.x += (corner & 1) ? 1 : 0;
 		tmp.y += (corner & 2) ? 1 : 0;
 		tmp.z += (corner & 4) ? 1 : 0;

@@ -295,7 +295,7 @@ _CPU_AND_GPU_CODE_ inline void checkPointVisibility(THREADPTR(bool) &isVisible, 
 
 template<bool useSwapping>
 _CPU_AND_GPU_CODE_ inline void checkBlockVisibility(THREADPTR(bool) &isVisible, THREADPTR(bool) &isVisibleEnlarged,
-	const THREADPTR(Vector3s) &hashPos, const CONSTPTR(Matrix4f) & M_d, const CONSTPTR(Vector4f) &projParams_d,
+	const THREADPTR(Vector3ss) &hashPos, const CONSTPTR(Matrix4f) & M_d, const CONSTPTR(Vector4f) &projParams_d,
 	const CONSTPTR(float) &voxelSize, const CONSTPTR(Vector2i) &imgSize)
 {
 	Vector4f pt_image;
