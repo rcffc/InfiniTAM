@@ -70,7 +70,10 @@ void ITMSceneReconstructionEngine_CPU<TVoxel, ITMVoxelBlockHash>::IntegrateIntoS
 	Vector4u *rgb = view->rgb->GetData(MEMORYDEVICE_CPU);
 	TVoxel *localVBA = scene->localVBA.GetVoxelBlocks();
 	ITMHashEntry *hashTable = scene->index.GetEntries();
-
+	TVoxel *occupiedBlocks = scene->localVBA.GetOccupiedVoxelBlocks(scene->index.noTotalEntries, hashTable);
+	// std::list<std::map<Vector3i, TVoxel>> list = getOccupiedVoxels(localVBA, hashTable);
+	// TVoxel first = getOneVoxel(list);
+	// TVoxel first = getOneVoxel(localVBA, hashTable);
 	int *visibleEntryIds = renderState_vh->GetVisibleEntryIDs();
 	int noVisibleEntries = renderState_vh->noVisibleEntries;
 
