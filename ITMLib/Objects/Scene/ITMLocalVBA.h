@@ -49,9 +49,9 @@ namespace ITMLib
 
 		void freeArray()
 		{
-			// free(array);
-				// array = NULL;
-			// used = size = 0;
+			free(array);
+			array = NULL;
+			used = size = 0;
 		}
 
 		// TVoxel *GetOccupiedVoxelBlocks(void) {
@@ -68,7 +68,7 @@ namespace ITMLib
 		// 	return array;
 		// }
 
-		TVoxel *GetOccupiedVoxelBlocks2(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData * index) {
+		TVoxel *GetOccupiedVoxelBlocks(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData * index) {
 			freeArray();
 			initArray(8000);
 
