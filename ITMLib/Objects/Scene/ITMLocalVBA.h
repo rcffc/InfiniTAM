@@ -4,6 +4,7 @@
 
 #include "../../../ORUtils/MemoryBlock.h"
 #include "../../../ORUtils/MemoryBlockPersister.h"
+#include "../../../ORUtils/DynamicArray.h"
 
 namespace ITMLib
 {
@@ -24,55 +25,14 @@ namespace ITMLib
 		inline TVoxel *GetVoxelBlocks(void) { return voxelBlocks->GetData(memoryType); }
 		inline const TVoxel *GetVoxelBlocks(void) const { return voxelBlocks->GetData(memoryType); }
 
-		TVoxel *array;
-		size_t used;
-		size_t size;
-
-		void initArray(size_t initialSize)
+		DynamicArray<Vector3i> positions;
+		DynamicArray<TVoxel> voxels;
+		
+	 	void refreshOccupiedVoxelBlocks(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData *index)
 		{
-			array = (TVoxel *)malloc(initialSize * sizeof(TVoxel));
-			used = 0;
-			size = initialSize;
-		}
+			positions.initArray(8000);
+			voxels.initArray(8000);
 
-		void insertArray(TVoxel element)
-		{
-			// a->used is the number of used entries, because a->array[a->used++] updates a->used only *after* the array has been accessed.
-			// Therefore a->used can go up to a->size
-			if (used == size)
-			{
-				size *= 2;
-				array = (TVoxel *)realloc(array, size * sizeof(TVoxel));
-			}
-			array[used++] = element;
-		}
-
-		void freeArray()
-		{
-			free(array);
-			array = NULL;
-			used = size = 0;
-		}
-
-		// TVoxel *GetOccupiedVoxelBlocks(void) {
-		// 	int i;
-		// 	freeArray();
-		// 	initArray(1000);
-		// 	TVoxel* t = GetVoxelBlocks();
-		// 	for (i = 0; i < allocatedSize; i++ ) {
-		// 		TVoxel vi = *(t + i);
-		// 		if (vi.w_depth > 0) {
-		// 			insertArray(vi);
-		// 		}
-		// 	}
-		// 	return array;
-		// }
-
-		TVoxel *GetOccupiedVoxelBlocks(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData * index) {
-			freeArray();
-			initArray(8000);
-
-			// voxelIndex.GetEntries();
 			for (int entryId = 0; entryId < noTotalEntries; entryId++)
 			{
 				const ITMHashEntry &currentHashEntry = index[entryId];
@@ -90,11 +50,11 @@ namespace ITMLib
 							Vector3i pos = globalPos + Vector3i(x, y, z);
 							TVoxel vi = readVoxel(GetVoxelBlocks(), index, pos, vmIndex);
 							if (vi.w_depth > 0) {
-								insertArray(vi);
+								positions.insertArray(pos);
+								voxels.insertArray(vi);
 							}
 						}
 			}
-			return array;
 		}
 
 		int *GetAllocationList(void) { return allocationList->GetData(memoryType); }
