@@ -1,0 +1,51 @@
+buildType:
+  default: debug
+  choices:
+    debug:
+      short: Debug
+      long: Emit debug information
+      buildType: Debug
+    release:
+      short: Release
+      long: Optimize generated code
+      buildType: Release
+    relwtihdebinfo:
+      short: RelWithDebInfo
+      long: Slightly optimized code with some debug info
+      buildType: RelWithDebInfo
+    asan:
+      short: Asan
+      long: Instrument with Address Sanitizer
+      buildType: Asan
+    tsan:
+      short: Tsan
+      long: Instrument with Thread Sanitizer
+      buildType: Tsan
+ 
+linkage:
+  default: static
+  choices:
+    static:
+      short: Static
+      long: Create static libraries
+      linkage: static
+    shared:
+      short: Shared
+      long: Create shared libraries/DLLs
+      linkage: shared
+ 
+vl:
+  default: vl
+  choices:
+    vl:
+      short: vl
+      long: vl-settings
+      settings:
+        CMAKE_PREFIX_PATH: C:/Users/pejiang/Documents/GitHub/infinitam_dependencies
+        GLUT_ROOT: C:/freeglut-MSVC-2.8.1-1.mp/freeglut
+        WITH_CUDA: FALSE
+        WITH_PNG: TRUE
+        WITH_OPENNI: FALSE
+        OPENNI_INCLUDE_DIR: C:/InfiniTAM/OpenNI2/Include
+        OPENNI_LIBRARY: C:/InfiniTAM/OpenNI2/Bin/x64-Release/OpenNI2.lib
+        OPENNI_ROOT: C:/InfiniTAM/OpenNI2
