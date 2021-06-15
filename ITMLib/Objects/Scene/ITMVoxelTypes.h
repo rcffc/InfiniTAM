@@ -4,6 +4,12 @@
 
 #include "../../../ORUtils/Math.h"
 
+template <typename T>
+int sgn(T val)
+{
+	return (T(0) < val) - (val < T(0));
+}
+
 /** \brief
     Stores the information of a single voxel in the volume
 */
@@ -12,6 +18,10 @@ struct ITMVoxel_f_rgb
 	_CPU_AND_GPU_CODE_ static float SDF_initialValue() { return 1.0f; }
 	_CPU_AND_GPU_CODE_ static float valueToFloat(float x) { return x; }
 	_CPU_AND_GPU_CODE_ static float floatToValue(float x) { return x; }
+	_CPU_AND_GPU_CODE_ static float fTSDF(float x)
+	{
+		return sgn(x) * (1 - abs(x));
+	}
 
 	static const CONSTPTR(bool) hasColorInformation = true;
 	static const CONSTPTR(bool) hasConfidenceInformation = false;
@@ -25,6 +35,7 @@ struct ITMVoxel_f_rgb
 	Vector3w clr;
 	/** Number of observations that made up @p clr. */
 	uchar w_color;
+	float ftsdf;
 
 	_CPU_AND_GPU_CODE_ ITMVoxel_f_rgb()
 	{
@@ -32,6 +43,7 @@ struct ITMVoxel_f_rgb
 		w_depth = 0;
 		clr = Vector3w((uchar)0);
 		w_color = 0;
+		ftsdf = 0;
 	}
 };
 
@@ -73,6 +85,11 @@ struct ITMVoxel_s
 	_CPU_AND_GPU_CODE_ static short SDF_initialValue() { return 32767; }
 	_CPU_AND_GPU_CODE_ static float valueToFloat(float x) { return (float)(x) / 32767.0f; }
 	_CPU_AND_GPU_CODE_ static short floatToValue(float x) { return (short)((x) * 32767.0f); }
+	_CPU_AND_GPU_CODE_ static float fTSDF(float x) 
+	{
+		float v = valueToFloat(x);
+		return sgn(v) * (1 - abs(v));
+	}
 
 	static const CONSTPTR(bool) hasColorInformation = false;
 	static const CONSTPTR(bool) hasConfidenceInformation = false;
@@ -84,11 +101,13 @@ struct ITMVoxel_s
 	uchar w_depth;
 	/** Padding that may or may not improve performance on certain GPUs */
 	//uchar pad;
+	float ftsdf;
 
 	_CPU_AND_GPU_CODE_ ITMVoxel_s()
 	{
 		sdf = SDF_initialValue();
 		w_depth = 0;
+		ftsdf = 0;
 	}
 };
 

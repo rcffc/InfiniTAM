@@ -71,64 +71,6 @@ _CPU_AND_GPU_CODE_ inline int findVoxel(const CONSTPTR(ITMLib::ITMVoxelBlockHash
 	return result;
 }
 
-template <class TVoxel>
-_CPU_AND_GPU_CODE_ inline std::list<std::map<Vector3i, TVoxel>> getOccupiedVoxels(const CONSTPTR(TVoxel) * voxelData, const CONSTPTR(ITMLib::ITMVoxelBlockHash::IndexData) * voxelIndex)
-{
-	std::list<std::map<Vector3i, TVoxel>> list;
-	int noTotalEntries = 0x100000 + 0x20000;
-
-	for (int entryId = 0; entryId < noTotalEntries; entryId++)
-	{
-		const ITMHashEntry &currentHashEntry = voxelIndex[entryId];
-
-		if (currentHashEntry.ptr < 0)
-			continue;
-		list.push_back(getNeighborhood(voxelData, voxelIndex, &currentHashEntry));
-	}
-	return list;
-}
-
-template <class TVoxel>
-_CPU_AND_GPU_CODE_ inline TVoxel getOneVoxel(const CONSTPTR(TVoxel) * voxelData, const CONSTPTR(ITMLib::ITMVoxelBlockHash::IndexData) * voxelIndex)
-{
-	std::list<std::map<Vector3i, TVoxel>> occVox = getOccupiedVoxels(voxelData, voxelIndex);
-	std::map<Vector3i, TVoxel> bla = occVox.front();
-	for (auto it : bla) {
-		return it.second;
-	}
-}
-
-template <class TVoxel>
-_CPU_AND_GPU_CODE_ inline TVoxel getOneVoxel(std::list<std::map<Vector3i, TVoxel>>  occVox)
-{
-	std::map<Vector3i, TVoxel> bla = occVox.front();
-	for (auto it : bla) {
-		return it.second;
-	}
-}
-
-template <class TVoxel>
-_CPU_AND_GPU_CODE_ inline std::map<Vector3i, TVoxel> getNeighborhood(const CONSTPTR(TVoxel) * voxelData, const CONSTPTR(ITMLib::ITMVoxelBlockHash::IndexData) * voxelIndex,
-																		const CONSTPTR(ITMLib::ITMVoxelBlockHash::IndexData) * hashEntry)
-{
-	std::map<Vector3i, TVoxel> positions;
-	// Vector3i positions[SDF_BLOCK_SIZE3];
-	// int i = 0;
-	Vector3i globalPos = hashEntry->pos.toInt() * SDF_BLOCK_SIZE;
-	int vmIndex;
-
-	for (int z = 0; z < SDF_BLOCK_SIZE; z++)
-		for (int y = 0; y < SDF_BLOCK_SIZE; y++)
-			for (int x = 0; x < SDF_BLOCK_SIZE; x++)
-			{
-				Vector3i pos = globalPos + Vector3i(x, y, z);
-				positions[pos] = readVoxel(voxelData, voxelIndex, pos, vmIndex);
-				// i++;
-			}
-
-	return positions;
-}
-
 template<class TVoxel>
 _CPU_AND_GPU_CODE_ inline TVoxel readVoxel(const CONSTPTR(TVoxel) *voxelData, const CONSTPTR(ITMLib::ITMVoxelBlockHash::IndexData) *voxelIndex,
 	const THREADPTR(Vector3i) & point, THREADPTR(int) &vmIndex, THREADPTR(ITMLib::ITMVoxelBlockHash::IndexCache) & cache)

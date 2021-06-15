@@ -73,8 +73,6 @@ void ITMSceneReconstructionEngine_CPU<TVoxel, ITMVoxelBlockHash>::IntegrateIntoS
 	// scene->localVBA.refreshOccupiedVoxelBlocks(scene->index.noTotalEntries, hashTable);
 	// TVoxel *occupied = scene->localVBA.voxels.array;
 	// Vector3i *occPos = scene->localVBA.positions.array;
-	// TVoxel first = getOneVoxel(list);
-	// TVoxel first = getOneVoxel(localVBA, hashTable);
 	int *visibleEntryIds = renderState_vh->GetVisibleEntryIDs();
 	int noVisibleEntries = renderState_vh->noVisibleEntries;
 
