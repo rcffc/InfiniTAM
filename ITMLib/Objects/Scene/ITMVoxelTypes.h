@@ -5,7 +5,7 @@
 #include "../../../ORUtils/Math.h"
 
 template <typename T>
-int sgn(T val)
+_CPU_AND_GPU_CODE_ int sgn(T val)
 {
 	return (T(0) < val) - (val < T(0));
 }

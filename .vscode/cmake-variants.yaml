@@ -43,7 +43,7 @@ vl:
       settings:
         CMAKE_PREFIX_PATH: C:/Users/pejiang/Documents/GitHub/infinitam_dependencies
         GLUT_ROOT: C:/freeglut-MSVC-2.8.1-1.mp/freeglut
-        WITH_CUDA: FALSE
+        WITH_CUDA: TRUE
         WITH_PNG: TRUE
         WITH_OPENNI: FALSE
         OPENNI_INCLUDE_DIR: C:/InfiniTAM/OpenNI2/Include
