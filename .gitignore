@@ -34,3 +34,5 @@ last.txt
 vba.txt
 out/
 .vs/
+*.stl
+*.ply
