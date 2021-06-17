@@ -305,7 +305,7 @@ ITMTrackingState::TrackingResult ITMBasicEngine<TVoxel,TIndex>::ProcessFrame(ORU
 		denseMapper->ProcessFrame(view, trackingState, scene, renderState_live);
 		didFusion = true;
 		if (framesProcessed > 50) trackingInitialised = true;
-
+		printf("%i", framesProcessed);
 		framesProcessed++;
 	}
 
