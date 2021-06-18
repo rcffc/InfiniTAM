@@ -578,7 +578,8 @@ void ITMExtendedTracker::TrackCamera(ITMTrackingState *trackingState, const ITMV
 			ComputeDelta(step, nabla_good, A, currentIterationType != TRACKER_ITERATION_BOTH);
 
 			ApplyDelta(approxInvPose, step, approxInvPose);
-			trackingState->pose_d->SetInvM(approxInvPose);
+			// trackingState->pose_d->SetInvM(approxInvPose);
+			trackingState->pose_d->SetFrom(trackingState->supplied_pose);
 			trackingState->pose_d->Coerce();
 			approxInvPose = trackingState->pose_d->GetInvM();
 

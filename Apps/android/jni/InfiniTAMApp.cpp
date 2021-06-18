@@ -3,7 +3,7 @@
 #include "InfiniTAMApp.h"
 #include "../../../InputSource/OpenNIEngine.h"
 #include "../../../InputSource/IMUSourceEngine.h"
-
+#include "../../../InputSource/PoseSourceEngine.h"
 #include "../../../ITMLib/Core/ITMBasicEngine.h"
 #include "../../../ITMLib/ITMLibDefines.h"
 
@@ -154,6 +154,7 @@ void InfiniTAMApp::StartProcessing(int useLiveCamera)
 	inputRGBImage = new ITMUChar4Image(mImageSource->getRGBImageSize(), true, allocateGPU);
 	inputRawDepthImage = new ITMShortImage(mImageSource->getDepthImageSize(), true, allocateGPU);
 	inputIMUMeasurement = new ITMIMUMeasurement();
+	inputPose = new SE3Pose();
 
 #ifndef COMPILE_WITHOUT_CUDA
 	ORcudaSafeCall(cudaThreadSynchronize());
@@ -183,7 +184,7 @@ bool InfiniTAMApp::ProcessFrame(void)
 
 	//actual processing on the mainEngine
 	if (mImuSource != NULL) mMainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage, inputIMUMeasurement);
-	else mMainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage);
+	else mMainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage, pose);
 
 	if (mRecordingMode) {
 		if (recordRGB) {

@@ -28,12 +28,13 @@ using namespace ITMLib;
     @para arg4 the IMU images. If images are omitted, some live sources will
     be tried.
 */
-static void CreateDefaultImageSource(ImageSourceEngine* & imageSource, IMUSourceEngine* & imuSource, const char *arg1, const char *arg2, const char *arg3, const char *arg4)
+static void CreateDefaultImageSource(ImageSourceEngine* & imageSource, IMUSourceEngine* & imuSource, PoseSourceEngine* & poseSource, const char *arg1, const char *arg2, const char *arg3, const char *arg4)
 {
 	const char *calibFile = arg1;
 	const char *filename1 = arg2;
 	const char *filename2 = arg3;
-	const char *filename_imu = arg4;
+	const char *filenamePose = arg4;
+	const char *filename_imu = NULL;
 
 	if (strcmp(calibFile, "viewer") == 0)
 	{
@@ -46,7 +47,7 @@ static void CreateDefaultImageSource(ImageSourceEngine* & imageSource, IMUSource
 
 	if ((imageSource == NULL) && (filename2 != NULL))
 	{
-		printf("using rgb images: %s\nusing depth images: %s\n", filename1, filename2);
+		printf("using rgb images: %s\nusing depth images: %s\nusing poses: %s\n", filename1, filename2, filenamePose);
 		if (filename_imu == NULL)
 		{
 			ImageMaskPathGenerator pathGenerator(filename1, filename2);
@@ -66,6 +67,10 @@ static void CreateDefaultImageSource(ImageSourceEngine* & imageSource, IMUSource
 			imuSource = NULL;
 			imageSource = NULL;
 		}
+	}
+
+	if (filenamePose != NULL) {
+		poseSource = new PoseSourceEngine(filenamePose);
 	}
 
 	if ((imageSource == NULL) && (filename1 != NULL) && (filename_imu == NULL))
@@ -183,8 +188,9 @@ try
 	printf("initialising ...\n");
 	ImageSourceEngine *imageSource = NULL;
 	IMUSourceEngine *imuSource = NULL;
+	PoseSourceEngine *poseSource = NULL;
 
-	CreateDefaultImageSource(imageSource, imuSource, arg1, arg2, arg3, arg4);
+	CreateDefaultImageSource(imageSource, imuSource, poseSource, arg1, arg2, arg3, arg4);
 	if (imageSource==NULL)
 	{
 		std::cout << "failed to open any image stream" << std::endl;
@@ -199,18 +205,18 @@ try
 	case ITMLibSettings::LIBMODE_BASIC:
 		mainEngine = new ITMBasicEngine<ITMVoxel, ITMVoxelIndex>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
 		break;
-	case ITMLibSettings::LIBMODE_BASIC_SURFELS:
-		mainEngine = new ITMBasicSurfelEngine<ITMSurfelT>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
-		break;
-	case ITMLibSettings::LIBMODE_LOOPCLOSURE:
-		mainEngine = new ITMMultiEngine<ITMVoxel, ITMVoxelIndex>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
-		break;
+	// case ITMLibSettings::LIBMODE_BASIC_SURFELS:
+	// 	mainEngine = new ITMBasicSurfelEngine<ITMSurfelT>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
+	// 	break;
+	// case ITMLibSettings::LIBMODE_LOOPCLOSURE:
+	// 	mainEngine = new ITMMultiEngine<ITMVoxel, ITMVoxelIndex>(internalSettings, imageSource->getCalib(), imageSource->getRGBImageSize(), imageSource->getDepthImageSize());
+	// 	break;
 	default: 
 		throw std::runtime_error("Unsupported library mode!");
 		break;
 	}
 
-	UIEngine::Instance()->Initialise(argc, argv, imageSource, imuSource, mainEngine, "./Files/Out", internalSettings->deviceType);
+	UIEngine::Instance()->Initialise(argc, argv, imageSource, imuSource, poseSource, mainEngine, "./Files/Out", internalSettings->deviceType);
 	UIEngine::Instance()->Run();
 	UIEngine::Instance()->Shutdown();
 

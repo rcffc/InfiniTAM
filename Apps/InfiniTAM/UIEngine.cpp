@@ -490,7 +490,7 @@ void UIEngine::glutMouseWheelFunction(int button, int dir, int x, int y)
 	uiEngine->needsRefresh = true;
 }
 
-void UIEngine::Initialise(int & argc, char** argv, ImageSourceEngine *imageSource, IMUSourceEngine *imuSource, ITMMainEngine *mainEngine,
+void UIEngine::Initialise(int & argc, char** argv, ImageSourceEngine *imageSource, IMUSourceEngine *imuSource, PoseSourceEngine *poseSource, ITMMainEngine *mainEngine,
 	const char *outFolder, DeviceType deviceType)
 {
 	this->freeviewActive = false;
@@ -507,6 +507,7 @@ void UIEngine::Initialise(int & argc, char** argv, ImageSourceEngine *imageSourc
 
 	this->imageSource = imageSource;
 	this->imuSource = imuSource;
+	this->poseSource = poseSource;
 	this->mainEngine = mainEngine;
 	{
 		size_t len = strlen(outFolder);
@@ -565,6 +566,7 @@ void UIEngine::Initialise(int & argc, char** argv, ImageSourceEngine *imageSourc
 
 	inputRGBImage = new ORUChar4Image(imageSource->getRGBImageSize(), true, allocateGPU);
 	inputRawDepthImage = new ORShortImage(imageSource->getDepthImageSize(), true, allocateGPU);
+	inputPose = new SE3Pose();
 	inputIMUMeasurement = new ITMIMUMeasurement();
 
 	saveImage = new ORUChar4Image(imageSource->getDepthImageSize(), true, false);
@@ -617,6 +619,11 @@ void UIEngine::ProcessFrame()
 		else imuSource->getMeasurement(inputIMUMeasurement);
 	}
 
+	if (poseSource != NULL) {
+		if (!poseSource->hasMorePoses()) return;
+		else poseSource->getPose(inputPose);
+	}
+
 	if (isRecording)
 	{
 		char str[250];
@@ -643,9 +650,9 @@ void UIEngine::ProcessFrame()
 
 	ITMTrackingState::TrackingResult trackerResult;
 	//actual processing on the mailEngine
-	if (imuSource != NULL) trackerResult = mainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage, inputIMUMeasurement);
-	else trackerResult = mainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage);
-
+	// if (imuSource != NULL) trackerResult = mainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage, inputIMUMeasurement, inputPose);
+	// else trackerResult = mainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage);
+	trackerResult = mainEngine->ProcessFrame(inputRGBImage, inputRawDepthImage, inputIMUMeasurement, inputPose);
 	trackingResult = (int)trackerResult;
 
 #ifndef COMPILE_WITHOUT_CUDA

@@ -4,6 +4,7 @@
 
 #include "../../InputSource/ImageSourceEngine.h"
 #include "../../InputSource/IMUSourceEngine.h"
+#include "../../InputSource/PoseSourceEngine.h"
 #include "../../InputSource/FFMPEGWriter.h"
 #include "../../ITMLib/Core/ITMMainEngine.h"
 #include "../../ITMLib/Utils/ITMLibSettings.h"
@@ -37,6 +38,7 @@ namespace InfiniTAM
 
 			InputSource::ImageSourceEngine *imageSource;
 			InputSource::IMUSourceEngine *imuSource;
+			InputSource::PoseSourceEngine *poseSource;
 			ITMLib::ITMLibSettings internalSettings;
 			ITMLib::ITMMainEngine *mainEngine;
 
@@ -52,6 +54,7 @@ namespace InfiniTAM
 			ITMLib::ITMMainEngine::GetImageType outImageType[NUM_WIN];
 
 			ORUChar4Image *inputRGBImage; ORShortImage *inputRawDepthImage;
+			ORUtils::SE3Pose *inputPose;
 			ITMLib::ITMIMUMeasurement *inputIMUMeasurement;
 
 			bool freeviewActive;
@@ -89,8 +92,8 @@ namespace InfiniTAM
 			bool needsRefresh;
 			ORUChar4Image *saveImage;
 
-			void Initialise(int & argc, char** argv, InputSource::ImageSourceEngine *imageSource, InputSource::IMUSourceEngine *imuSource,
-				ITMLib::ITMMainEngine *mainEngine, const char *outFolder, ORUtils::DeviceType deviceType);
+			void Initialise(int &argc, char **argv, InputSource::ImageSourceEngine *imageSource, InputSource::IMUSourceEngine *imuSource,
+					InputSource::PoseSourceEngine *poseSource, ITMLib::ITMMainEngine *mainEngine, const char *outFolder, ORUtils::DeviceType deviceType);
 			void Shutdown();
 
 			void Run();

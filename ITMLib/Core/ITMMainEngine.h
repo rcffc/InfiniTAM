@@ -5,6 +5,7 @@
 #include "../Objects/Misc/ITMIMUMeasurement.h"
 #include "../Trackers/Interface/ITMTracker.h"
 #include "../Utils/ITMLibSettings.h"
+// #include "../../ORUtils/SE3Pose.h"
 
 /** \mainpage
     This is the API reference documentation for InfiniTAM. For a general
@@ -70,6 +71,9 @@ namespace ITMLib
 
 		/// Process a frame with rgb and depth images and optionally a corresponding imu measurement
         virtual ITMTrackingState::TrackingResult ProcessFrame(ORUChar4Image *rgbImage, ORShortImage *rawDepthImage, ITMIMUMeasurement *imuMeasurement = NULL) = 0;
+
+		/// Process a frame with rgb and depth images and optionally a corresponding imu measurement and a given pose
+		virtual ITMTrackingState::TrackingResult ProcessFrame(ORUChar4Image *rgbImage, ORShortImage *rawDepthImage, ITMIMUMeasurement *imuMeasurement, ORUtils::SE3Pose *pose) = 0;
 
 		/// Get a result image as output
 		virtual Vector2i GetImageSize(void) const = 0;

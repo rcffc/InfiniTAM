@@ -34,6 +34,7 @@ namespace ITMLib
 
 		/// Current pose of the depth camera.
 		ORUtils::SE3Pose *pose_d;
+		ORUtils::SE3Pose *supplied_pose;
 
 		/// Tracking quality: 1.0: success, 0.0: failure
 		enum TrackingResult
@@ -72,9 +73,10 @@ namespace ITMLib
 		}
 
 		ITMTrackingState(Vector2i imgSize, MemoryDeviceType memoryType)
-		: pointCloud(new ITMPointCloud(imgSize, memoryType)),
-			pose_pointCloud(new ORUtils::SE3Pose),
-			pose_d(new ORUtils::SE3Pose)
+			: pointCloud(new ITMPointCloud(imgSize, memoryType)),
+			  pose_pointCloud(new ORUtils::SE3Pose),
+			  pose_d(new ORUtils::SE3Pose),
+			  supplied_pose(new ORUtils::SE3Pose)
 		{
 			Reset();
 		}

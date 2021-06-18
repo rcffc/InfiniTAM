@@ -45,6 +45,7 @@ Kinect2Engine.cpp
 LibUVCEngine.cpp
 OpenNIEngine.cpp
 PicoFlexxEngine.cpp
+PoseSourceEngine.cpp
 RealSenseEngine.cpp
 RealSense2Engine.cpp
 )
@@ -60,6 +61,7 @@ Kinect2Engine.h
 LibUVCEngine.h
 OpenNIEngine.h
 PicoFlexxEngine.h
+PoseSourceEngine.h
 RealSenseEngine.h
 RealSense2Engine.h
 )

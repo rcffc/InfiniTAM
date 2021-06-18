@@ -60,6 +60,8 @@ namespace ITMLib
 
 		ITMTrackingState::TrackingResult ProcessFrame(ORUChar4Image *rgbImage, ORShortImage *rawDepthImage, ITMIMUMeasurement *imuMeasurement = NULL);
 
+		ITMTrackingState::TrackingResult ProcessFrame(ORUChar4Image *rgbImage, ORShortImage *rawDepthImage, ITMIMUMeasurement *imuMeasurement, ORUtils::SE3Pose *pose);
+
 		/// Extracts a mesh from the current scene and saves it to the model file specified by the file name
 		void SaveSceneToMesh(const char *fileName);
 
