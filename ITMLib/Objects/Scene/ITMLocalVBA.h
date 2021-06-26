@@ -30,6 +30,19 @@ namespace ITMLib
 		
 	 	void refreshOccupiedVoxelBlocks(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData *index)
 		{
+			TVoxel *voxelBlocks = GetVoxelBlocks();
+			if (memoryType == MEMORYDEVICE_CUDA)
+			{
+				TVoxel *localVBA_cpu = (TVoxel *)malloc(sizeof(TVoxel) * allocatedSize);
+				cudaMemcpyFromSymbol(localVBA_cpu, voxelBlocks, sizeof(TVoxel) * allocatedSize);
+				voxelBlocks = localVBA_cpu;
+
+				// TODO need to check memorytypeof Index, not LocalVBA!
+				ITMLib::ITMVoxelBlockHash::IndexData *index_cpu = (ITMHashEntry *)malloc(sizeof(ITMHashEntry) * (0x100000 + 0x20000));
+				cudaMemcpyFromSymbol(index_cpu, index, sizeof(ITMHashEntry) * (0x100000 + 0x20000));
+				index = index_cpu;
+			}
+
 			positions.initArray(8000);
 			voxels.initArray(8000);
 
@@ -48,7 +61,7 @@ namespace ITMLib
 						for (int x = 0; x < SDF_BLOCK_SIZE; x++)
 						{
 							Vector3i pos = globalPos + Vector3i(x, y, z);
-							TVoxel vi = readVoxel(GetVoxelBlocks(), index, pos, vmIndex);
+							TVoxel vi = readVoxel(voxelBlocks, index, pos, vmIndex);
 							if (vi.w_depth > 0) {
 								float ftsdf = TVoxel::fTSDF(vi.sdf);
 								if (ftsdf != 0) {
@@ -59,7 +72,13 @@ namespace ITMLib
 							}
 						}
 			}
-		}
+
+			if (memoryType == MEMORYDEVICE_CUDA)
+				{
+					free(voxelBlocks);
+					free(index);
+				}
+			}
 
 		int *GetAllocationList(void) { return allocationList->GetData(memoryType); }
 
