@@ -337,7 +337,7 @@ ITMTrackingState::TrackingResult ITMBasicEngine<TVoxel,TIndex>::ProcessFrame(ORU
 	QuaternionFromRotationMatrix(R, q);
 	fprintf(stderr, "%f %f %f %f %f %f %f\n", t[0], t[1], t[2], q[1], q[2], q[3], q[0]);
 #endif
-    SaveSceneToMesh("0.ply");
+    // SaveSceneToMesh("0.ply");
     return trackerResult;
 }
 
