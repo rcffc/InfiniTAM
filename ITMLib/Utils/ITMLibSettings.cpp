@@ -40,10 +40,11 @@ ITMLibSettings::ITMLibSettings(void)
 	useBilateralFilter = false;
 
 	/// what to do on tracker failure: ignore, relocalise or stop integration - not supported in loop closure version
-	behaviourOnFailure = FAILUREMODE_IGNORE;
+	behaviourOnFailure = FAILUREMODE_RELOCALISE;
 
 	/// switch between various library modes - basic, with loop closure, etc.
 	libMode = LIBMODE_BASIC;
+	// libMode = LIBMODE_LOOPCLOSURE;
 	//libMode = LIBMODE_BASIC_SURFELS;
 
 	//// Default ICP tracking
@@ -57,6 +58,9 @@ ITMLibSettings::ITMLibSettings(void)
 					  "numiterC=20,numiterF=50,tukeyCutOff=8,"
 					  "framesToSkip=20,framesToWeight=50,failureDec=20.0";
 
+	// File-based Tracker:
+	// trackerConfig = "type=file, mask=C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/pose/%i.txt, initialFrameNo=0";
+	
 	//// For hybrid intensity+depth tracking:
 	//trackerConfig = "type=extended,levels=bbb,useDepth=1,useColour=1,"
 	//				  "colourWeight=0.3,minstep=1e-4,"

@@ -38,16 +38,19 @@ void ITMFileBasedTracker::TrackCamera(ITMTrackingState *trackingState, const ITM
 	Matrix4f invPose;
 
 	// Matrix is column-major
-	poseFile >> invPose.m00 >> invPose.m10 >> invPose.m20 >> invPose.m30
-	         >> invPose.m01 >> invPose.m11 >> invPose.m21 >> invPose.m31
-	         >> invPose.m02 >> invPose.m12 >> invPose.m22 >> invPose.m32
-	         >> invPose.m03 >> invPose.m13 >> invPose.m23 >> invPose.m33;
+	// poseFile >> invPose.m00 >> invPose.m10 >> invPose.m20 >> invPose.m30
+	//          >> invPose.m01 >> invPose.m11 >> invPose.m21 >> invPose.m31
+	//          >> invPose.m02 >> invPose.m12 >> invPose.m22 >> invPose.m32
+	//          >> invPose.m03 >> invPose.m13 >> invPose.m23 >> invPose.m33;
+
+	poseFile >> invPose.m00 >> invPose.m01 >> invPose.m02 >> invPose.m03 >> invPose.m10 >> invPose.m11 >> invPose.m12 >> invPose.m13 >> invPose.m20 >> invPose.m21 >> invPose.m22 >> invPose.m23 >> invPose.m30 >> invPose.m31 >> invPose.m32 >> invPose.m33;
 
 	if (poseFile)
 	{
 		// No read errors, tracking is assumed good
 		trackingState->trackerResult = ITMTrackingState::TRACKING_GOOD;
-		trackingState->pose_d->SetInvM(invPose);
+		// trackingState->pose_d->SetInvM(invPose);
+		trackingState->pose_d->SetM(invPose);
 	}
 }
 
