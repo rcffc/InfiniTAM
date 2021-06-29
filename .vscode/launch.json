@@ -16,12 +16,9 @@
             "request": "launch",
             "program": "C:\\Users\\pejiang\\Documents\\GitHub\\InfiniTAM\\build\\Apps\\InfiniTAM\\Release\\InfiniTAM.exe",
             "args": [
-                        "C:/Users/pejiang/Documents/ScanNet/scans/calib.txt",
+                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/calib.txt",
                         "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/color/%i.png",
                         "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/depth/%i.png",
-                        // "C:/Users/pejiang/Documents/GitHub/InfiniTAM/Files/Teddy/calib.txt", 
-                        // "C:/Users/pejiang/Documents/GitHub/InfiniTAM/Files/Teddy/color/%04i.png", 
-                        // "C:/Users/pejiang/Documents/GitHub/InfiniTAM/Files/Teddy/depth/%04i.png"
                     ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -34,12 +31,9 @@
             "request": "launch",
             "program": "C:\\Users\\pejiang\\Documents\\GitHub\\InfiniTAM\\build\\Apps\\InfiniTAM\\Debug\\InfiniTAM.exe",
             "args": [
-                        "C:/Users/pejiang/Documents/ScanNet/scans/calib.txt",
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0707_00/color/%i.png",
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0707_00/depth/%i.png"
-                        // "C:/Users/pejiang/Documents/GitHub/InfiniTAM/Files/Teddy/calib.txt", 
-                        // "C:/Users/pejiang/Documents/GitHub/InfiniTAM/Files/Teddy/color/%04i.png", 
-                        // "C:/Users/pejiang/Documents/GitHub/InfiniTAM/Files/Teddy/depth/%04i.png"
+                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/calib.txt",
+                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/color/%i.png",
+                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/depth/%i.png"
                     ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
