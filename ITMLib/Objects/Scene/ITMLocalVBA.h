@@ -62,9 +62,10 @@ namespace ITMLib
 						{
 							Vector3i pos = globalPos + Vector3i(x, y, z);
 							TVoxel vi = readVoxel(voxelBlocks, index, pos, vmIndex);
-							if (vi.w_depth > 0) {
+							if (vi.w_depth > 0 && (vi.clr.x > 0 || vi.clr.y > 0 || vi.clr.z > 0))
+							{
 								float ftsdf = TVoxel::fTSDF(vi.sdf);
-								if (ftsdf != 0) {
+								if (abs(ftsdf) >= 0.99) {
 									vi.ftsdf = ftsdf;
 									positions.insertArray(pos);
 									voxels.insertArray(vi);
