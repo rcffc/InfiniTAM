@@ -79,6 +79,11 @@ namespace ITMLib
 			return mActiveDataManager->findPrimaryLocalMapIdx();
 		}
 
+		ITMVoxelMapGraphManager<TVoxel, TIndex>* GetVoxelMapGraphManager(void)
+		{
+			return mapManager;
+		}
+
 		/// Extracts a mesh from the current scene and saves it to the model file specified by the file name
 		void SaveSceneToMesh(const char *fileName);
 

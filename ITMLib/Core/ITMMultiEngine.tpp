@@ -305,7 +305,7 @@ void ITMMultiEngine<TVoxel, TIndex>::SaveSceneToMesh(const char *modelFileName)
 	ITMMesh *mesh = new ITMMesh(settings->GetMemoryType());
 
 	meshingEngine->MeshScene(mesh, *mapManager);
-	mesh->WriteSTL(modelFileName);
+	mesh->WritePLY(modelFileName);
 	
 	delete mesh;
 }
@@ -313,7 +313,19 @@ void ITMMultiEngine<TVoxel, TIndex>::SaveSceneToMesh(const char *modelFileName)
 template <typename TVoxel, typename TIndex>
 void ITMMultiEngine<TVoxel, TIndex>::SaveToFile()
 {
+	// throws error if any of the saves fail
 
+	std::string saveOutputDirectory = "State/";
+	std::string relocaliserOutputDirectory = saveOutputDirectory + "Relocaliser/", sceneOutputDirectory = saveOutputDirectory + "Scene/";
+
+	MakeDir(saveOutputDirectory.c_str());
+	MakeDir(relocaliserOutputDirectory.c_str());
+	MakeDir(sceneOutputDirectory.c_str());
+
+	if (relocaliser)
+		relocaliser->SaveToDirectory(relocaliserOutputDirectory);
+	int id = getFreeviewLocalMapIdx();
+	mapManager->getLocalMap(id)->scene->SaveToDirectory(sceneOutputDirectory);
 }
 
 template <typename TVoxel, typename TIndex>
