@@ -5,40 +5,52 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(Linux) Attach",
+            "type": "cppdbg",
+            "request": "attach",
+            "processId": "${command:pickProcess}",
+            "program": "${workspaceRoot}/../smg-pynfinitam/venv3.7/bin/python"
+        },
+        {
+            "name": "(Linux) InfiniTAM Release",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/home/taro/infinitam-dev/InfiniTAM/build/Release/Apps/InfiniTAM/InfiniTAM",
+            "args": [
+                "/igd/a4/homestud/pejiang/ScanNet/scans/scene0000_00/calib.txt",
+                "/igd/a4/homestud/pejiang/ScanNet/scans/scene0000_00/color/%i.png",
+                "/igd/a4/homestud/pejiang/ScanNet/scans/scene0000_00/depth/%i.png",
+            ],
+            // "args": [
+            //     "/home/taro/ready/scene0025_00/calib.txt",
+            //     "/home/taro/ready/scene0025_00/frame-%06i.color.png",
+            //     "/home/taro/ready/scene0025_00/frame-%06i.depth.png"
+            //     // "/igd/a4/homestud/pejiang/trajectory/ready/scene0025_00/frame-%06i.depth.png",
+            // ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "console": "externalTerminal"
+        },
+        {
             "name": "(Windows) Attach",
             "type": "cppvsdbg",
             "request": "attach",
             "processId": "${command:pickProcess}"
         },
         {
-            "name": "InfiniTAM Release",
+            "name": "(Windows) InfiniTAM Release",
             "type": "cppvsdbg",
             "request": "launch",
             "program": "C:\\Users\\pejiang\\Documents\\GitHub\\InfiniTAM\\build\\Apps\\InfiniTAM\\Release\\InfiniTAM.exe",
             "args": [
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/calib.txt",
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/color/%i.png",
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/depth/%i.png",
-                    ],
+                "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/calib.txt",
+                "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/color/%i.png",
+                "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/depth/%i.png",
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "console": "externalTerminal"
         },
-        {
-            "name": "InfiniTAM Debug",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "C:\\Users\\pejiang\\Documents\\GitHub\\InfiniTAM\\build\\Apps\\InfiniTAM\\Debug\\InfiniTAM.exe",
-            "args": [
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/calib.txt",
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/color/%i.png",
-                        "C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/depth/%i.png"
-                    ],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "console": "externalTerminal"
-        }
     ]
 }

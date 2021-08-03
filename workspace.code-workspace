@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"path": "../smg-pynfinitam"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.languageServer": "Microsoft",
+		"terminal.integrated.shell.windows": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+		"terminal.integrated.shellArgs.windows": [
+			"/K",
+			"C:\\ProgramData\\Miniconda3\\Scripts\\activate.bat C:\\ProgramData\\Miniconda3 & conda activate pynfinitam"
+		],
+		"files.associations": {
+			"random": "cpp",
+			"*.ipp": "cpp",
+			"optional": "cpp",
+			"regex": "cpp",
+			"system_error": "cpp"
+		}
+	}
+}

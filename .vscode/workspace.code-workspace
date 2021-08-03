@@ -1,13 +1,13 @@
 {
 	"folders": [
 		{
+			"path": "../../../../../igd/a4/homestud/pejiang/repos/SparseConvNet"
+		},
+		{
 			"path": ".."
 		},
 		{
-			"path": "..\\..\\smg-pynfinitam"
-		},
-		{
-			"path": "..\\..\\spaint"
+			"path": "../../smg-pynfinitam"
 		}
 	],
 	"settings": {

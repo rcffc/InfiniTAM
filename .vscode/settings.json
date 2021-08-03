@@ -1,8 +1,10 @@
 {
     "cmake.configureOnOpen": false,
+    "cmake.buildDirectory": "${workspaceFolder}/build/${buildType}",
     "files.associations": {
         "*.tpp": "cpp",
         "*.tcu": "cpp",
         "*.cu": "cpp",
-    }
+    },
+    "debug.allowBreakpointsEverywhere" : true
 }
