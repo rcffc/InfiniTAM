@@ -37,7 +37,7 @@ ITMLibSettings::ITMLibSettings(void)
 	useApproximateRaycast = false;
 
 	/// enable or disable bilateral depth filtering
-	useBilateralFilter = false;
+	useBilateralFilter = true;
 
 	/// what to do on tracker failure: ignore, relocalise or stop integration - not supported in loop closure version
 	behaviourOnFailure = FAILUREMODE_RELOCALISE;
@@ -59,7 +59,8 @@ ITMLibSettings::ITMLibSettings(void)
 					  "framesToSkip=20,framesToWeight=50,failureDec=20.0";
 
 	// File-based Tracker:
-	// trackerConfig = "type=file, mask=C:/Users/pejiang/Documents/ScanNet/scans/scene0000_00/pose/%i.txt, initialFrameNo=0";
+	// trackerConfig = "type=file, mask=/igd/a4/homestud/pejiang/Documents/ScanNet/scans/scene0000_00/pose/%i.txt, initialFrameNo=0";
+	// trackerConfig = "type=file, mask=/home/taro/ready/scene0025_00/frame-%06i.pose.txt, initialFrameNo=0";
 	
 	//// For hybrid intensity+depth tracking:
 	//trackerConfig = "type=extended,levels=bbb,useDepth=1,useColour=1,"
