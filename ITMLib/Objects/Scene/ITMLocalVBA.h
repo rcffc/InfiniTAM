@@ -34,12 +34,12 @@ namespace ITMLib
 			if (memoryType == MEMORYDEVICE_CUDA)
 			{
 				TVoxel *localVBA_cpu = (TVoxel *)malloc(sizeof(TVoxel) * allocatedSize);
-				cudaMemcpyFromSymbol(localVBA_cpu, voxelBlocks, sizeof(TVoxel) * allocatedSize);
+				cudaMemcpy(localVBA_cpu, voxelBlocks, sizeof(TVoxel) * allocatedSize, cudaMemcpyDeviceToHost);
 				voxelBlocks = localVBA_cpu;
 
 				// TODO need to check memorytypeof Index, not LocalVBA!
 				ITMLib::ITMVoxelBlockHash::IndexData *index_cpu = (ITMHashEntry *)malloc(sizeof(ITMHashEntry) * (0x100000 + 0x20000));
-				cudaMemcpyFromSymbol(index_cpu, index, sizeof(ITMHashEntry) * (0x100000 + 0x20000));
+				cudaMemcpy(index_cpu, index, sizeof(ITMHashEntry) * (0x100000 + 0x20000), cudaMemcpyDeviceToHost);
 				index = index_cpu;
 			}
 
@@ -62,10 +62,10 @@ namespace ITMLib
 						{
 							Vector3i pos = globalPos + Vector3i(x, y, z);
 							TVoxel vi = readVoxel(voxelBlocks, index, pos, vmIndex);
-							if (vi.w_depth > 0 && (vi.clr.x > 0 || vi.clr.y > 0 || vi.clr.z > 0))
+							if (vi.w_depth > 0 && (vi.clr.x > 0 || vi.clr.y > 0 || vi.clr.z > 0) && x%8==y%8==z%8==0)
 							{
 								float ftsdf = TVoxel::fTSDF(vi.sdf);
-								if (abs(ftsdf) >= 0.99) {
+								if (abs(ftsdf) >= 0.95) {
 									vi.ftsdf = ftsdf;
 									positions.insertArray(pos);
 									voxels.insertArray(vi);
