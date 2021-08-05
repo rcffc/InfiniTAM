@@ -66,7 +66,7 @@ namespace ITMLib
 							{
 								float ftsdf = TVoxel::fTSDF(vi.sdf);
 								if (abs(ftsdf) >= 0.95) {
-									vi.ftsdf = ftsdf;
+									// vi.ftsdf = ftsdf;
 									positions.insertArray(pos);
 									voxels.insertArray(vi);
 								}
