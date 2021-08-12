@@ -6,6 +6,10 @@
 #include "../../../ORUtils/MemoryBlockPersister.h"
 #include "../../../ORUtils/DynamicArray.h"
 
+#ifndef COMPILE_WITHOUT_CUDA
+#include "../../../ORUtils/CUDADefines.h"
+#endif
+
 namespace ITMLib
 {
 	/** \brief
@@ -31,6 +35,7 @@ namespace ITMLib
 	 	void refreshOccupiedVoxelBlocks(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData *index)
 		{
 			TVoxel *voxelBlocks = GetVoxelBlocks();
+			#ifndef COMPILE_WITHOUT_CUDA
 			if (memoryType == MEMORYDEVICE_CUDA)
 			{
 				TVoxel *localVBA_cpu = (TVoxel *)malloc(sizeof(TVoxel) * allocatedSize);
@@ -42,6 +47,7 @@ namespace ITMLib
 				cudaMemcpy(index_cpu, index, sizeof(ITMHashEntry) * (0x100000 + 0x20000), cudaMemcpyDeviceToHost);
 				index = index_cpu;
 			}
+			#endif
 
 			positions.initArray(8000);
 			voxels.initArray(8000);
@@ -62,11 +68,14 @@ namespace ITMLib
 						{
 							Vector3i pos = globalPos + Vector3i(x, y, z);
 							TVoxel vi = readVoxel(voxelBlocks, index, pos, vmIndex);
-							if (vi.w_depth > 0 && (vi.clr.x > 0 || vi.clr.y > 0 || vi.clr.z > 0) && x%8==y%8==z%8==0)
+							if (vi.w_depth > 0 
+							&& (vi.clr.x > 0 || vi.clr.y > 0 || vi.clr.z > 0) 
+							&& x%4==y%4==z%4==0
+							)
 							{
 								float ftsdf = TVoxel::fTSDF(vi.sdf);
-								if (abs(ftsdf) >= 0.95) {
-									vi.ftsdf = ftsdf;
+								if (abs(ftsdf) >= 0.9) {
+									// vi.ftsdf = ftsdf;
 									positions.insertArray(pos);
 									voxels.insertArray(vi);
 								}
