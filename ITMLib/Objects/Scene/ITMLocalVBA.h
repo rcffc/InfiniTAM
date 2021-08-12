@@ -70,12 +70,11 @@ namespace ITMLib
 							TVoxel vi = readVoxel(voxelBlocks, index, pos, vmIndex);
 							if (vi.w_depth > 0 
 							&& (vi.clr.x > 0 || vi.clr.y > 0 || vi.clr.z > 0) 
-							&& x%4==y%4==z%4==0
+							&& x%8==y%8==z%8==0
 							)
 							{
 								float ftsdf = TVoxel::fTSDF(vi.sdf);
 								if (abs(ftsdf) >= 0.9) {
-									// vi.ftsdf = ftsdf;
 									positions.insertArray(pos);
 									voxels.insertArray(vi);
 								}
