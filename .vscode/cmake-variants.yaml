@@ -46,4 +46,4 @@ vl:
         WITH_OPENNI: FALSE
         # PNG_LIBRARY_RELEASE: /usr/lib/x86_64-linux-gnu/libpng.so
         # PNG_PNG_INCLUDE_DIR: /usr/include
-        COMPILE_WITHOUT_CUDA: TRUE
+        COMPILE_WITHOUT_CUDA: FALSE

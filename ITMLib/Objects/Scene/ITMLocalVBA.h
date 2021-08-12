@@ -6,6 +6,10 @@
 #include "../../../ORUtils/MemoryBlockPersister.h"
 #include "../../../ORUtils/DynamicArray.h"
 
+#ifndef COMPILE_WITHOUT_CUDA
+#include "../../../ORUtils/CUDADefines.h"
+#endif
+
 namespace ITMLib
 {
 	/** \brief
@@ -31,6 +35,7 @@ namespace ITMLib
 	 	void refreshOccupiedVoxelBlocks(int noTotalEntries, ITMLib::ITMVoxelBlockHash::IndexData *index)
 		{
 			TVoxel *voxelBlocks = GetVoxelBlocks();
+			#ifndef COMPILE_WITHOUT_CUDA
 			if (memoryType == MEMORYDEVICE_CUDA)
 			{
 				TVoxel *localVBA_cpu = (TVoxel *)malloc(sizeof(TVoxel) * allocatedSize);
@@ -42,6 +47,7 @@ namespace ITMLib
 				cudaMemcpy(index_cpu, index, sizeof(ITMHashEntry) * (0x100000 + 0x20000), cudaMemcpyDeviceToHost);
 				index = index_cpu;
 			}
+			#endif
 
 			positions.initArray(8000);
 			voxels.initArray(8000);
