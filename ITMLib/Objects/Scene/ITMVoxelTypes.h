@@ -35,7 +35,6 @@ struct ITMVoxel_f_rgb
 	Vector3w clr;
 	/** Number of observations that made up @p clr. */
 	uchar w_color;
-	float ftsdf;
 
 	_CPU_AND_GPU_CODE_ ITMVoxel_f_rgb()
 	{
@@ -43,7 +42,6 @@ struct ITMVoxel_f_rgb
 		w_depth = 0;
 		clr = Vector3w((uchar)0);
 		w_color = 0;
-		ftsdf = 0;
 	}
 };
 
@@ -101,13 +99,11 @@ struct ITMVoxel_s
 	uchar w_depth;
 	/** Padding that may or may not improve performance on certain GPUs */
 	//uchar pad;
-	float ftsdf;
 
 	_CPU_AND_GPU_CODE_ ITMVoxel_s()
 	{
 		sdf = SDF_initialValue();
 		w_depth = 0;
-		ftsdf = 0;
 	}
 };
 
